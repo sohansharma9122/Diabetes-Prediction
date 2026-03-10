@@ -1,0 +1,228 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Prediction</title>
+  <style>
+    :root {
+      --primary: #4fd1c5;
+      --secondary: #2c5282;
+      --bg: linear-gradient(135deg, #0f172a, #1e293b);
+      --card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --radius: 14px;
+      --ease: cubic-bezier(.22,.9,.3,1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      background: var(--card);
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s var(--ease);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      letter-spacing: 1px;
+      animation: slideDown 1s var(--ease);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 30px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+      animation: fadeUp 1s var(--ease);
+    }
+
+    .note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 5px;
+      animation: fadeIn 1s var(--ease);
+    }
+
+    form {
+      margin-top: 15px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    input[type="number"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      outline: none;
+      transition: all 0.3s var(--ease);
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(79, 209, 197, 0.3);
+      transform: translateY(-3px);
+    }
+
+    button {
+      background: var(--primary);
+      color: #0f172a;
+      padding: 10px 25px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.4s var(--ease);
+    }
+
+    button:hover {
+      background: #38b2ac;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(79, 209, 197, 0.3);
+    }
+
+    hr {
+      margin: 40px 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .upload-section {
+      animation: fadeUp 1.2s var(--ease);
+    }
+
+    .upload-section input[type="file"] {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideDown {
+      from {transform: translateY(-20px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes fadeUp {
+      from {transform: translateY(20px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Diabetes Prediction System</h1>
+    <p class="note">Predict diabetes using your health data or upload a medical report for analysis.</p>
+
+    <h2>Manual Input Prediction</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-grid">
+        <div>
+          <label>Pregnancies:</label>
+          <input type="number" step="any" name="preg" placeholder="e.g. 2">
+        </div>
+        <div>
+          <label>Glucose:</label>
+          <input type="number" step="any" name="glucose" placeholder="e.g. 120">
+        </div>
+        <div>
+          <label>Blood Pressure:</label>
+          <input type="number" step="any" name="bp" placeholder="e.g. 80">
+        </div>
+        <div>
+          <label>Skin Thickness:</label>
+          <input type="number" step="any" name="skin" placeholder="e.g. 25">
+        </div>
+        <div>
+          <label>Insulin:</label>
+          <input type="number" step="any" name="insulin" placeholder="e.g. 90">
+        </div>
+        <div>
+          <label>BMI:</label>
+          <input type="number" step="any" name="bmi" placeholder="e.g. 24.5">
+        </div>
+        <div>
+          <label>Diabetes Pedigree:</label>
+          <input type="number" step="any" name="pedigree" placeholder="e.g. 0.5">
+        </div>
+        <div>
+          <label>Age:</label>
+          <input type="number" step="any" name="age" placeholder="e.g. 35">
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:14px;">
+        <button type="submit">Predict</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <div class="upload-section">
+      <h2>📤 Upload Medical Report</h2>
+      <form method="post" enctype="multipart/form-data" action="{% url 'upload_report' %}">
+        {% csrf_token %}
+        <input type="file" name="report" accept="image/*,.pdf" required>
+        <button type="submit">Upload & Analyze</button>
+      </form>
+      <p class="note">Supported: JPG, PNG, PDF (multi-page supported)</p>
+    </div>
+  </div>
+</body>
+</html>
+

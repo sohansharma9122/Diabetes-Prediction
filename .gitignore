@@ -1,0 +1,22 @@
+# virtual environment
+.venv/
+env/
+
+# python cache
+__pycache__/
+*.pyc
+
+# django
+db.sqlite3
+media/
+staticfiles/
+
+# environment file
+.env
+
+# vscode
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db

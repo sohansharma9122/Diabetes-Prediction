@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logout - Online Bank</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .logout-box {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      color: #4fd1c5;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4fd1c5;
+      color: #0f172a;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    a:hover {
+      background: #38b2ac;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-box">
+    <h1>Logged Out</h1>
+    <p>{{ msg }}</p>
+    <a href="/">Return to Login</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<header class="p-3 bg-dark text-white">
+<div class="container">
+  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+    <!-- Logo -->
+     <img src="{% static 'images/diabetes_logo1.png' %}" width="45" height="45" class="me-3 rounded" alt="Logo">
+
+    <!-- NAV list -->
+    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+      <li><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-link px-2 text-body-secondary">contact</a></li>
+      <li><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">about</a></li>
+      <li><a href="{% url 'faq' %}" class="nav-link px-2 text-body-secondary">faq</a></li>
+      <li><a href="{% url 'gallary' %}" class="nav-link px-2 text-body-secondary">gallary</a></li>
+    </ul>
+
+    <!-- Search -->
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+    </form>
+
+    <!-- Auth Buttons -->
+    <div class="text-end">
+      <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}" class="text-white text-decoration-none">Login</a></button>
+      <button type="button" class="btn btn-warning"><a href="{% url 'register' %}" class="text-dark text-decoration-none">Sign-up</a></button>
+      <button type="button" class="btn btn-warning" style="background: red;"><a href="{% url  'logout' %}" class="text-dark text-decoration-none" >Logout</a></button>
+    </div>
+
+  </div>
+</div>
+</header>

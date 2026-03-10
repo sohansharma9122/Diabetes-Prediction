@@ -1,0 +1,200 @@
+{% extends "layout/base.html" %}
+{% block Homeblock %}
+{% load static %}
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+
+    /* Navy Blue Premium Glassic Background */
+    background: linear-gradient(135deg, #001f3f, #003566, #001a33);
+    background-size: 300% 300%;
+    animation: bgMove 12s ease infinite;
+    color: white;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Floating blurred lights */
+  body::before,
+  body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+  }
+
+  body::before {
+    top: -70px;
+    left: -70px;
+  }
+
+  body::after {
+    bottom: -60px;
+    right: -60px;
+    animation-delay: 2s;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes float {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(40px,40px); }
+  }
+
+
+  /* Main about box */
+  .about-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.25);
+    animation: fadeIn 1s ease-in-out;
+    color: #e8f7ff;
+  }
+
+  h1, h2 {
+    background: linear-gradient(90deg, #7eeaff, #66d9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    margin-top: 35px;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #d8f4ff;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 25px;
+    color: #c7ecff;
+  }
+
+  ul li {
+    margin-bottom: 10px;
+  }
+
+  .feature-box {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(14px);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  }
+
+  .chart-section img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .author-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+.chart-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    gap: 20px;
+}
+
+.chart-section img {
+    width: 48%;  /* 2 images in 1 row */
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    display: block;
+    margin: 0;
+}
+
+
+</style>
+
+
+<div class="about-container">
+  <h1>About Diabetes Prediction Project</h1>
+  <p>
+    This project provides an easy-to-use online platform where patients can check if they are at risk of diabetes. Users can either fill their health data manually (like glucose, BMI, age, pedigree, insulin, etc.) or upload a medical report photo. The system automatically extracts the data and predicts whether the patient has diabetes.
+  </p>
+
+  <h2>Features</h2>
+  <div class="feature-box">
+    <ul>
+      <li>User-friendly interface suitable for both patients and doctors.</li>
+      <li>Accurate predictions using advanced Machine Learning and Deep Learning models.</li>
+      <li>Data collection via manual input or report upload (automatic data extraction).</li>
+      <li>Location-based suggestions for the nearest diabetes doctors if the prediction is positive.</li>
+      <li>All data securely recorded in the admin panel.</li>
+    </ul>
+  </div>
+
+  <h2>Technology Stack</h2>
+  <ul>
+    <li><strong>Backend:</strong> Python, Django</li>
+    <li><strong>Frontend:</strong> HTML, CSS, JavaScript, Bootstrap</li>
+    <li><strong>Machine Learning & Deep Learning:</strong> Predictive algorithms for diabetes detection</li>
+    <li><strong>Computer Vision:</strong> OpenCV for automatic report data extraction</li>
+  </ul>
+
+  <h2>Visual Insights</h2>
+  <p>Here are some analytics from our machine learning model:</p>
+  <div class="chart-section">
+    <img src="{% static 'images/bar.png' %}" alt="Bar Chart">
+    <img src="{% static 'images/pia_chart.png' %}" alt="Pie Chart">
+  </div>
+
+  <!-- <h2>About the Author</h2>
+  <div class="author-section">
+    <p>This project is developed by <strong>Sohan Sharma</strong>. It demonstrates a professional, end-to-end diabetes prediction system with modern web and AI technologies.</p>
+  </div>
+</div> -->
+
+{% endblock %}

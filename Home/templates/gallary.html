@@ -1,0 +1,198 @@
+{% extends "layout/base.html" %}
+{% block Homeblock %}
+{% load static %}
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+
+    /* Premium Navy Blue Glassic Background */
+    background: linear-gradient(135deg, #001f3f, #003566, #001a33);
+    background-size: 300% 300%;
+    animation: bgMove 12s ease infinite;
+
+    position: relative;
+    overflow-x: hidden;
+    color: white;
+  }
+
+  /* floating blurred lights (glassmorphism) */
+  body::before,
+  body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    filter: blur(120px);
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+  }
+
+  body::before {
+    top: -50px;
+    left: -70px;
+  }
+
+  body::after {
+    bottom: -60px;
+    right: -60px;
+    animation-delay: 2s;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes float {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(40px,40px); }
+  }
+
+  /* ---------------- Gallery ----------------- */
+
+  .gallery-container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 10px 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #66e0ff;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  @media (max-width: 800px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateX(0);
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .from-left { transform: translateX(-180px); }
+  .from-right { transform: translateX(180px); }
+
+  .show { opacity: 1 !important; transform: translateX(0) !important; }
+
+  .gallery-card img {
+    width: 100%;
+    display: block;
+  }
+
+  .gallery-info {
+    padding: 15px 18px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 18px 18px;
+  }
+
+  .gallery-info h3 {
+    font-size: 1.2rem;
+    color: #66e0ff;
+    margin: 0 0 6px;
+  }
+
+  .gallery-info p {
+    font-size: 0.95rem;
+    color: #cce8ff;
+  }
+</style>
+
+
+
+
+<div class="gallery-container">
+  <h1>Diabetes Prediction Project Gallery</h1>
+
+  <div class="gallery-grid">
+
+    <!-- 1 -->
+    <div class="gallery-card from-left">
+      <img src="{% static 'images/Diabetes_illustration.png' %}">
+      <div class="gallery-info"><h3>Diabetes Awareness</h3><p>Symptoms & causes.</p></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="gallery-card from-right">
+      <img src="{% static 'images/workflow.png' %}">
+      <div class="gallery-info"><h3>Workflow</h3><p>ML pipeline.</p></div>
+    </div>
+  
+
+    <!-- 3 LEFT -->
+    <div class="gallery-card from-left">
+      <img src="{% static 'images/input.png' %}">
+      <div class="gallery-info"><h3>Input Form</h3><p>Patient parameters.</p></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="gallery-card from-right">
+      <img src="{% static 'images/diabetes_result.png' %}">
+      <div class="gallery-info"><h3>Prediction Result</h3><p>Diabetic or not.</p></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="gallery-card from-left">
+      <img src="{% static 'images/location.png' %}">
+      <div class="gallery-info"><h3>Nearby Doctors</h3><p>Specialists around.</p></div>
+    </div>
+
+    <!-- 6 -->
+    <div class="gallery-card from-right">
+      <img src="{% static 'images/bar.png' %}">
+      <div class="gallery-info"><h3>Bar Chart</h3><p>Dataset analysis.</p></div>
+    </div>
+
+    <!-- 7 -->
+    <div class="gallery-card from-left">
+      <img src="{% static 'images/pia_chart.png' %}">
+      <div class="gallery-info"><h3>Pie Chart</h3><p>Accuracy visualization.</p></div>
+    </div>
+
+    <!-- 8 -->
+    <div class="gallery-card from-right">
+      <img src="{% static 'images/accuracy.png' %}">
+      <div class="gallery-info"><h3>AI Accuracy</h3><p>Model comparison.</p></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Animation Script -->
+<script>
+  window.onload = () => {
+    const cards = document.querySelectorAll('.gallery-card');
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('show'), i * 250);
+    });
+  };
+</script>
+
+{% endblock %}

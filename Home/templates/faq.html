@@ -1,0 +1,282 @@
+{% extends "layout/base.html" %}
+{% block Homeblock %}
+{% load static %}
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+
+    /* Navy Blue Premium Glassic Background */
+    background: linear-gradient(135deg, #001f3f, #003566, #001a33);
+    background-size: 300% 300%;
+    animation: bgMove 12s ease infinite;
+    position: relative;
+    overflow-x: hidden;
+    color: white;
+  }
+
+  /* Floating blurred lights */
+  body::before,
+  body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.15);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+  }
+
+  body::before {
+    top: -70px;
+    left: -70px;
+  }
+
+  body::after {
+    bottom: -60px;
+    right: -60px;
+    animation-delay: 2s;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes float {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(40px,40px); }
+  }
+
+
+  /* -------- FAQ BOX -------- */
+  .faq-container {
+    max-width: 900px;
+    margin: 60px auto;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    padding: 50px;
+    color: #e8f7ff;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .faq-container h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7eeaff, #66d9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+  }
+
+  .accordion-item {
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+  }
+
+  .accordion-item input {
+    display: none;
+  }
+
+  .accordion-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    color: #dff8ff;
+    background: transparent;
+  }
+
+  .accordion-label:hover {
+    color: #7eeaff;
+  }
+
+  .accordion-label::after {
+    content: "▼";
+    transition: transform 0.3s ease;
+  }
+
+  .accordion-item input:checked + .accordion-label::after {
+    transform: rotate(-180deg);
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 25px;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(10px);
+    color: #e3f6ff;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: max-height 0.6s ease 0.2s,
+                opacity 0.6s ease 0.2s,
+                transform 0.6s ease 0.2s,
+                padding 0.6s ease 0.2s;
+  }
+
+  .accordion-item input:checked ~ .accordion-content {
+    max-height: 600px;
+    padding: 18px 25px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  code {
+    background: #003566;
+    color: #7eeaff;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+  }
+</style>
+
+
+<div class="faq-container">
+  <h2>Diabetes Prediction - Frequently Asked Questions</h2>
+
+  <div class="accordion">
+
+    <!-- FAQ Items -->
+    <div class="accordion-item">
+      <input type="checkbox" id="faq1">
+      <label for="faq1" class="accordion-label">What is this Diabetes Prediction System?</label>
+      <div class="accordion-content">
+        This web application predicts whether a person is likely to have diabetes based on medical input data such as glucose level, blood pressure, BMI, and age, using a machine learning model.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq2">
+      <label for="faq2" class="accordion-label">How does the system work?</label>
+      <div class="accordion-content">
+        The system uses a trained Machine Learning model that analyzes the entered data and predicts the chances of diabetes.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq3">
+      <label for="faq3" class="accordion-label">What data is required for prediction?</label>
+      <div class="accordion-content">
+        You need to provide basic health details like:
+        <ul>
+          <li>Number of Pregnancies</li>
+          <li>Glucose Level</li>
+          <li>Blood Pressure</li>
+          <li>Skin Thickness</li>
+          <li>Insulin Level</li>
+          <li>BMI</li>
+          <li>Diabetes Pedigree Function</li>
+          <li>Age</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq4">
+      <label for="faq4" class="accordion-label">Is my data stored or shared?</label>
+      <div class="accordion-content">
+        No, the system does not store or share any personal or health data. Your inputs are used only for prediction during your session.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq5">
+      <label for="faq5" class="accordion-label">How accurate is the prediction?</label>
+      <div class="accordion-content">
+        The accuracy depends on the model used and training data. Typically, the accuracy is around 80–90%, based on the dataset used during training.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq6">
+      <label for="faq6" class="accordion-label">Can I use this system for medical diagnosis?</label>
+      <div class="accordion-content">
+        No, this tool is for educational and informational purposes only. Please consult a doctor for professional medical advice.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq7">
+      <label for="faq7" class="accordion-label">What technologies are used in this project?</label>
+      <div class="accordion-content">
+        The system is built using:
+        <ul>
+          <li>Python (Machine Learning Model)</li>
+          <li>Django Framework (Backend)</li>
+          <li>HTML, CSS (Frontend)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq8">
+      <label for="faq8" class="accordion-label">Which dataset is used for training?</label>
+      <div class="accordion-content">
+        The model is trained using the <b>PIMA Indians Diabetes Dataset</b>, a popular dataset from Kaggle and UCI Repository.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq9">
+      <label for="faq9" class="accordion-label">How can I run this project locally?</label>
+      <div class="accordion-content">
+        <ol>
+          <li>Clone the project from GitHub.</li>
+          <li>Install dependencies using <code>pip install -r requirements.txt</code>.</li>
+          <li>Run migrations and start the Django server using <code>python manage.py runserver</code>.</li>
+          <li>Open <code>http://127.0.0.1:8000/</code> in your browser.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq10">
+      <label for="faq10" class="accordion-label">Can I improve or retrain the model?</label>
+      <div class="accordion-content">
+        Yes, you can modify the dataset, tune parameters, and retrain the model to improve accuracy.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <input type="checkbox" id="faq11">
+      <label for="faq11" class="accordion-label">What if I enter wrong or blank data?</label>
+      <div class="accordion-content">
+        The system validates inputs and may show a warning asking you to fill all required fields correctly.
+      </div>
+    </div>
+
+    <!-- <div class="accordion-item">
+      <input type="checkbox" id="faq12">
+      <label for="faq12" class="accordion-label">Who developed this project?</label>
+      <div class="accordion-content">
+        This project was developed by <b>Sohan Sharma</b>, B.Tech (CSE), as a Machine Learning project using Python and Django.
+      </div>
+    </div> -->
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends "Clayout/base.html" %}
+{% block Contactblock %}
+{% load static %}
+
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    /* Navy Blue Premium Glassmorphic Background */
+    background: linear-gradient(135deg, #001a33, #00264d, #003366);
+    background-size: 300% 300%;
+    animation: bgMove 10s ease infinite;
+
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Soft glowing blur circles */
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.10);
+    filter: blur(110px);
+    border-radius: 50%;
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+body::before {
+    top: -80px;
+    left: -60px;
+}
+
+body::after {
+    bottom: -80px;
+    right: -60px;
+    animation-delay: 2s;
+}
+
+/* Background movement */
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating blur movement */
+@keyframes float {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(40px,40px); }
+}
+
+/* Feedback Form Glass Box */
+.feedback-container {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 35px 40px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+
+    animation: fadeIn 0.9s ease;
+    color: #eaf7ff;
+}
+
+.feedback-container h1 {
+    background: linear-gradient(90deg, #9ae6ff, #7ad3ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.feedback-container label {
+    font-weight: 600;
+    color: #d7ecff;
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+.feedback-container input[type="text"],
+.feedback-container input[type="email"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.30);
+    border-radius: 10px;
+    outline: none;
+    color: #eaf7ff;
+    font-size: 15px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.feedback-container input[type="text"]::placeholder,
+.feedback-container input[type="email"]::placeholder {
+    color: #c7dff5;
+}
+
+.feedback-container input[type="text"]:focus,
+.feedback-container input[type="email"]:focus {
+    border-color: #76e1ff;
+    box-shadow: 0 0 10px rgba(118, 225, 255, 0.4);
+}
+
+.feedback-container input[type="submit"] {
+    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.feedback-container input[type="submit"]:hover {
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    transform: translateY(-2px);
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #4dff88;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+</style>
+
+<div class="feedback-container">
+    <form method="post">
+        {% csrf_token %}
+        <h1>📝 Feedback Form</h1>
+
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Enter your full name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="xyz@gmail.com" required>
+
+        <label>Mobile No</label>
+        <input type="text" name="mob" placeholder="Enter your number" required>
+
+        <label>Feedback</label>
+        <input type="text" name="feedback" placeholder="Write your feedback here..." required>
+
+        <input type="submit" name="btn" value="Submit">
+    </form>
+
+    {% if MSG %}
+    <div class="message">{{ MSG }}</div>
+    {% endif %}
+</div>
+
+{% endblock %}

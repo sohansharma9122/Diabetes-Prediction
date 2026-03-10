@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #f8fbff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0d47a1;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #1e40af;
+      margin-top: 24px;
+      border-left: 4px solid #2563eb;
+      padding-left: 8px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    pre {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      overflow: auto;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    ul {
+      background: #f9fafb;
+      padding: 15px 20px;
+      border-radius: 10px;
+      list-style: none;
+      border: 1px solid #e2e8f0;
+    }
+
+    li {
+      margin: 6px 0;
+      font-size: 15px;
+    }
+
+    mark {
+      background: #fff3b0;
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #1e3a8a;
+      transform: scale(1.03);
+    }
+
+    .result-box {
+      text-align: center;
+      background: linear-gradient(135deg, #e0f2fe, #e8f5e9);
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      animation: slideUp 0.8s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ocr-section, .raw-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid #e5e7eb;
+      margin-top: 20px;
+      overflow: auto;
+    }
+
+    .ocr-section div {
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #e2e8f0;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 30px 16px;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🩺 Diabetes Prediction Result</h1>
+
+    {% if result %}
+      <div class="result-box">
+        <p style="font-size:20px; font-weight:600;">{{ result }}</p>
+      </div>
+    {% endif %}
+
+    {% if extracted %}
+      <h3>Extracted Values</h3>
+      <ul>
+        {% for key, val in extracted.items %}
+          <li><strong>{{ key }}:</strong> {{ val }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if map_url %}
+      <p style="margin-top:20px; text-align:center;">
+        🗺️ <a href="{{ map_url }}" target="_blank" class="btn">Find Diabetes Specialists Near You</a>
+      </p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Full OCR Scan (Highlighted)</h3>
+    <div class="ocr-section">
+      <div>{{ scanned_text|safe }}</div>
+    </div>
+
+    <hr>
+
+    <h3>Raw OCR Pages</h3>
+    <div class="raw-section">
+      {% for p in raw_pages %}
+        <h4>📄 Page {{ forloop.counter }}</h4>
+        <pre>{{ p }}</pre>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top:30px; text-align:center;">
+      <a href="{% url 'predict' %}" class="btn">🔙 Go Back</a>
+    </div>
+  </div>
+</body>
+</html>

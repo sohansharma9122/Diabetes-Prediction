@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+{% extends "layout/base.html" %}
+{% block Homeblock %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Diabetes Prediction System</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/diabetes_logo.png' %}" />
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Masthead -->
+    <header class="masthead text-white text-center py-5" 
+        style="background: url('{% static 'images/diabetes_bg.jpg' %}') no-repeat center center/cover; min-height: 100vh;">
+        <div class="container">
+            <img src="{% static 'images/diabetes_logo1.png' %}" alt="Diabetes Logo" class="mb-4" width="120">
+            <h1 class="mb-3">Predict Your Diabetes Risk</h1>
+            <p class="lead mb-4">Get instant insights using our Machine Learning-based prediction system</p>
+        </div>
+    </header>
+
+    <!-- Keep the rest of your sections (features, showcases, testimonials, etc.) here -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
