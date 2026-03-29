@@ -281,3 +281,4 @@ def upload_report(request):
         })
 
     return redirect('predict')
+

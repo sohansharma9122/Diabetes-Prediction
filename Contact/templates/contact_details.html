@@ -3,176 +3,190 @@
 {% load static %}
 
 <style>
-    body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+    :root {
+        --primary-navy: #0f172a;
+        --slate-600: #475569;
+        --slate-200: #e2e8f0;
+        --accent-blue: #2563eb;
+        --bg-soft: #f8fafc;
+    }
 
-    /* Navy Blue Premium Glassmorphic Background */
-    background: linear-gradient(135deg, #001a33, #00264d, #003366);
-    background-size: 300% 300%;
-    animation: bgMove 10s ease infinite;
+    /* Reset and Full Height Layout */
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: 'Inter', -apple-system, sans-serif;
+        color: var(--primary-navy);
+        overflow: hidden;
+        /* Updated Background */
+        background: 
+          linear-gradient(110deg, rgba(255, 255, 255, 0.95) 30%, rgba(240, 249, 255, 0.7) 100%),
+          url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+    }
 
-    position: relative;
-    overflow-x: hidden;
-}
+    .fullscreen-wrapper {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Removed radial-gradient to show the background image clearly */
+        padding: 20px;
+    }
 
-/* Soft glowing blur circles */
-body::before,
-body::after {
-    content: "";
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    background: rgba(255, 255, 255, 0.10);
-    filter: blur(110px);
-    border-radius: 50%;
-    z-index: -1;
-    animation: float 10s infinite alternate ease-in-out;
-}
+    /* Centering Logic using Flexbox */
+    .fullscreen-wrapper {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;    /* Vertical Center */
+        justify-content: center; /* Horizontal Center */
+        background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+        background-size: 30px 30px;
+        padding: 20px;
+    }
 
-body::before {
-    top: -80px;
-    left: -60px;
-}
+    /* Professional Card Design */
+    .feedback-container {
+        width: 100%;
+        max-width: 480px;
+        background: #ffffff;
+        padding: 45px;
+        border-radius: 16px;
+        border: 1px solid var(--slate-200);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        animation: fadeIn 0.6s ease-out;
+    }
 
-body::after {
-    bottom: -80px;
-    right: -60px;
-    animation-delay: 2s;
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-/* Background movement */
-@keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+    .feedback-container h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 8px;
+        letter-spacing: -0.025em;
+    }
 
-/* Floating blur movement */
-@keyframes float {
-    0% { transform: translate(0,0); }
-    100% { transform: translate(40px,40px); }
-}
+    .subtitle {
+        text-align: center;
+        color: var(--slate-600);
+        font-size: 0.95rem;
+        margin-bottom: 35px;
+    }
 
-/* Feedback Form Glass Box */
-.feedback-container {
-    max-width: 500px;
-    margin: 80px auto;
-    padding: 35px 40px;
-    text-align: center;
+    /* Form Elements */
+    .form-group { margin-bottom: 20px; }
 
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(18px);
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    label {
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--slate-600);
+        margin-bottom: 8px;
+        display: block;
+        letter-spacing: 0.05em;
+    }
 
-    animation: fadeIn 0.9s ease;
-    color: #eaf7ff;
-}
+    input[type="text"], input[type="email"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+        font-size: 1rem;
+        color: var(--primary-navy);
+        transition: all 0.2s ease;
+    }
 
-.feedback-container h1 {
-    background: linear-gradient(90deg, #9ae6ff, #7ad3ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 25px;
-    font-size: 30px;
-    font-weight: 700;
-}
+    input:focus {
+        border-color: var(--accent-blue);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
 
-.feedback-container label {
-    font-weight: 600;
-    color: #d7ecff;
-    display: block;
-    text-align: left;
-    margin-bottom: 6px;
-}
+    .btn-submit {
+        background-color: var(--primary-navy);
+        color: white;
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s;
+        margin-top: 10px;
+    }
 
-.feedback-container input[type="text"],
-.feedback-container input[type="email"] {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 18px;
+    .btn-submit:hover {
+        background-color: #000;
+        transform: translateY(-1px);
+    }
 
-    background: rgba(255,255,255,0.13);
-    border: 1px solid rgba(255,255,255,0.30);
-    border-radius: 10px;
-    outline: none;
-    color: #eaf7ff;
-    font-size: 15px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
+    .message-box {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
 
-.feedback-container input[type="text"]::placeholder,
-.feedback-container input[type="email"]::placeholder {
-    color: #c7dff5;
-}
-
-.feedback-container input[type="text"]:focus,
-.feedback-container input[type="email"]:focus {
-    border-color: #76e1ff;
-    box-shadow: 0 0 10px rgba(118, 225, 255, 0.4);
-}
-
-.feedback-container input[type="submit"] {
-    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 10px;
-    font-size: 17px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
-    width: 100%;
-}
-
-.feedback-container input[type="submit"]:hover {
-    background: linear-gradient(90deg, #0ea5e9, #0284c7);
-    transform: translateY(-2px);
-}
-
-.message {
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: 600;
-    color: #4dff88;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
+    /* Mobile Handling */
+    @media (max-width: 576px) {
+        .feedback-container {
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            padding: 20px;
+        }
+        body { background-color: #ffffff; background-image: none; }
+    }
 </style>
 
-<div class="feedback-container">
-    <form method="post">
-        {% csrf_token %}
-        <h1>📝 Feedback Form</h1>
+<div class="fullscreen-wrapper">
+    <div class="feedback-container">
+        <form method="post">
+            {% csrf_token %}
+            <h1>System Feedback</h1>
+            <p class="subtitle">Your professional input helps us improve.</p>
 
-        <label>Name</label>
-        <input type="text" name="name" placeholder="Enter your full name" required>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="John Doe" required>
+            </div>
 
-        <label>Email</label>
-        <input type="email" name="email" placeholder="xyz@gmail.com" required>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="name@company.com" required>
+            </div>
 
-        <label>Mobile No</label>
-        <input type="text" name="mob" placeholder="Enter your number" required>
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="text" name="mob" placeholder="+1 (555) 000-0000" required>
+            </div>
 
-        <label>Feedback</label>
-        <input type="text" name="feedback" placeholder="Write your feedback here..." required>
+            <div class="form-group">
+                <label>Your Feedback</label>
+                <input type="text" name="feedback" placeholder="How can we improve?" required>
+            </div>
 
-        <input type="submit" name="btn" value="Submit">
-    </form>
+            <button type="submit" name="btn" class="btn-submit">Submit Feedback</button>
+        </form>
 
-    {% if MSG %}
-    <div class="message">{{ MSG }}</div>
-    {% endif %}
+        {% if MSG %}
+        <div class="message-box alert-success mt-3">
+            {{ MSG }}
+        </div>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}

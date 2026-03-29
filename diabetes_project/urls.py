@@ -26,13 +26,13 @@ path('admin/', admin.site.urls),
 # Home
 path('',include('Home.urls')),
 # Register
-path('register/',include('Register.urls')),
+path('',include('Register.urls')),
 # login
-path('login/',include('Login.urls')),
+path('',include('Login.urls')),
 #predict
-path('predict/', include('predictor.urls')),
+path('', include('predictor.urls')),
 #Contact
-path('contact/', include('Contact.urls')),
+path('', include('Contact.urls')),
 # Logout
 path('', include('Logout.urls')),
 

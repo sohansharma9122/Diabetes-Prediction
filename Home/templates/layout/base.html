@@ -1,10 +1,28 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinicaAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        /* Saare Common Styles (Navbar, Colors, etc.) yahan raheinge */
+        :root { --primary-blue: #0284c7; --navy-900: #0f172a; }
+        .main-navbar-header { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 12px 0; position: sticky; top: 0; z-index: 1100; }
+        .user-avatar { width:38px; height:38px; background:var(--primary-blue); color:white; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; cursor:pointer; }
+        /* ... baki styles jo pehle diye the ... */
+    </style>
+</head>
+<body>
 
-{% include "layout/header.html" %}
+    {% include "layout/header.html" %}
 
-{% block Homeblock %}
+    <main>
+        {% block Homeblock %}{% endblock %}
+    </main>
 
-{% endblock %}
-
-{% include "layout/footer.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

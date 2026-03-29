@@ -4,84 +4,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User Registration</title>
-    <!-- Bootstrap CSS -->
+    <title>User Registration | ClinicaAI</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #0284c7;
+            --navy-900: #0f172a;
+            --slate-500: #64748b;
+            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(110deg, rgba(255, 255, 255, 0.95) 30%, rgba(240, 249, 255, 0.7) 100%),
+                        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--navy-900);
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        .card {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #ffffff;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.1) !important;
+            border-radius: 20px !important;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: transparent !important;
+            border-bottom: none;
+            padding-top: 2.5rem;
+            text-align: center;
+        }
+
+        .card-header h4 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            color: var(--navy-900);
+            font-size: 1.75rem;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--slate-500);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+
+        .btn-success {
+            background-color: #000000 !important;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:disabled {
+            background-color: #cbd5e1 !important;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-outline-secondary {
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            color: var(--slate-500);
+            text-decoration: none;
+            text-align: center;
+        }
+    </style>
 </head>
 
-<body style="background: url('{% static "Register/images/register_bg.png" %}') no-repeat center center/cover; min-height: 100vh;">
+<body>
 
-
-<div class="container py-5">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-header bg-primary text-white text-center rounded-top-4">
-                    <h4 class="mb-0">User Registration</h4>
+        <div class="col-lg-6 col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Create Account</h4>
+                    <p class="text-muted small mt-2">Join our Clinical Prediction Network</p>
                 </div>
                 <div class="card-body p-4">
-                    <form method="post" novalidate>
+                    <form id="registrationForm" method="post" novalidate>
                         {% csrf_token %}
                         
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your Name" name="name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="xyz@gmail.com" name="email" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Enter Password" name="pwd" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Mobile No</label>
-                            <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Gender</label><br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" value="Male" required>
-                                <label class="form-check-label">Male</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Name" name="name" required>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" value="Female">
-                                <label class="form-check-label">Female</label>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="xyz@gmail.com" name="email" required>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" name="dob" required>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="••••••••" name="pwd" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mobile No</label>
+                                <input type="text" class="form-control" placeholder="Phone Number" name="mobile" required>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Address</label>
-                            <textarea class="form-control" rows="3" placeholder="Enter your Address" name="addr"></textarea>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Gender</label><br>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input class="form-check-input" type="radio" name="gender" value="Male" id="male" required>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input class="form-check-input" type="radio" name="gender" value="Female" id="female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" name="dob" required>
+                            </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-success px-4" name="btn">Submit</button>
-                            <a href="{% url 'home' %}" class="btn btn-outline-secondary px-4">Back</a>
+                        <div class="mb-4">
+                            <label class="form-label">Residential Address</label>
+                            <textarea class="form-control" rows="2" placeholder="Full Address Details" name="addr" required></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary flex-fill">Back</a>
+                            <button type="submit" id="submitBtn" class="btn btn-success flex-fill text-white" name="btn" disabled>Submit</button>
                         </div>
                     </form>
                 </div>
-                {% if MSG %}
-                <div class="card-footer text-center text-danger fw-bold">
-                    {{ MSG }}
+
+                {% if MSG and "already registered" in MSG %}
+                <div class="card-footer text-center" style="background: #fff5f5; border-top: 1px solid #fee2e2;">
+                    <span style="color: #dc3545; font-weight: 700; font-size: 0.9rem;">
+                        ⚠️ {{ MSG }}
+                    </span>
                 </div>
                 {% endif %}
+            </div>
+            <p class="text-center mt-4 small text-muted">&copy; 2026 CLINICAL PREDICTION SYSTEMS</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg text-center" style="border-radius: 20px; border: none; padding: 20px;">
+            <div class="modal-body py-5">
+                <div style="width: 70px; height: 70px; background: #f0fdf4; color: #15803d; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; border: 2px solid #bbf7d0;">✓</div>
+                <h3 class="fw-bold mb-3">Success!</h3>
+                <p class="text-muted mb-4 px-3">{{ MSG }}</p>
+                <div class="d-grid col-10 mx-auto">
+                    <a href="{% url 'login' %}" class="btn btn-dark" style="background: #000; border-radius: 10px; padding: 12px; font-weight: 600; text-decoration: none;">Login Now</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // 1. Existing Validation Logic
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+
+    function checkForm() {
+        let isFormValid = true;
+        inputs.forEach(input => {
+            if (input.type === 'radio') {
+                const radioGroup = form.querySelectorAll(`input[name="${input.name}"]`);
+                const isChecked = Array.from(radioGroup).some(r => r.checked);
+                if (!isChecked) isFormValid = false;
+            } else {
+                if (input.value.trim() === '') isFormValid = false;
+            }
+        });
+        submitBtn.disabled = !isFormValid;
+    }
+
+    form.addEventListener('input', checkForm);
+    form.addEventListener('change', checkForm);
+
+    // 2. Fixed Modal Trigger Logic
+    // Django variable ko JS variable me liya taki HTML syntax error na aaye
+    var djangoMsg = "{{ MSG|escapejs }}";
+    
+    if (djangoMsg.includes("Successful")) {
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+            myModal.show();
+        });
+    }
+</script>
+
 </body>
 </html>

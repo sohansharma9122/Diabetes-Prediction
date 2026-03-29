@@ -3,196 +3,220 @@
 {% load static %}
 
 <style>
-  body {
-    font-family: "Poppins", sans-serif;
+  :root {
+    --primary-navy: #0f172a;
+    --slate-600: #475569;
+    --slate-200: #e2e8f0;
+    --accent-blue: #2563eb;
+    --bg-light: #f8fafc;
+  }
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
     margin: 0;
     padding: 0;
-
-    /* Premium Navy Blue Glassic Background */
-    background: linear-gradient(135deg, #001f3f, #003566, #001a33);
-    background-size: 300% 300%;
-    animation: bgMove 12s ease infinite;
-
-    position: relative;
-    overflow-x: hidden;
-    color: white;
+    color: var(--primary-navy);
+    /* Updated Background */
+    background: 
+      linear-gradient(110deg, rgba(255, 255, 255, 0.95) 30%, rgba(240, 249, 255, 0.7) 100%),
+      url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 
-  /* floating blurred lights (glassmorphism) */
-  body::before,
-  body::after {
-    content: "";
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    filter: blur(120px);
-    z-index: -1;
-    animation: float 10s infinite alternate ease-in-out;
+  .gallery-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
   }
 
-  body::before {
-    top: -50px;
-    left: -70px;
-  }
-
-  body::after {
-    bottom: -60px;
-    right: -60px;
-    animation-delay: 2s;
-  }
-
-  @keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @keyframes float {
-    0% { transform: translate(0,0); }
-    100% { transform: translate(40px,40px); }
-  }
-
-  /* ---------------- Gallery ----------------- */
-
-  .gallery-container {
-    max-width: 1300px;
-    margin: 40px auto;
-    padding: 10px 20px;
-  }
-
-  h1 {
+  .gallery-header {
     text-align: center;
-    color: #66e0ff;
-    font-size: 2.8rem;
-    margin-bottom: 40px;
-    font-weight: 700;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    margin-bottom: 50px;
+  }
+
+  .gallery-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    margin-bottom: 10px;
   }
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
   }
 
-  @media (max-width: 800px) {
-    .gallery-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .gallery-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid var(--slate-200);
     overflow: hidden;
-
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
-    transform: translateX(0);
-    transition: transform 0.9s ease, opacity 0.9s ease;
-    border: 1px solid rgba(255,255,255,0.25);
+    transform: translateY(20px);
   }
 
-  .from-left { transform: translateX(-180px); }
-  .from-right { transform: translateX(180px); }
+  .gallery-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-  .show { opacity: 1 !important; transform: translateX(0) !important; }
+  /* Fixed Container with WHITE Background */
+  .image-container {
+    width: 100%;
+    height: 280px; /* Fixed uniform height */
+    overflow: hidden;
+    background: #ffffff; /* Changed from black to white */
+    position: relative;
+    border-bottom: 1px solid var(--slate-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .gallery-card img {
     width: 100%;
-    display: block;
+    height: 100%;
+    object-fit: cover; /* Fills the box initially */
+    /* 2-Second Smooth Transition */
+    transition: transform 2s ease-in-out, object-fit 2s ease-in-out;
+  }
+
+  /* Smooth 2-Second Hover Effect */
+  .gallery-card:hover img {
+    transform: scale(1.1); /* Gentle zoom */
+    object-fit: contain; /* Shows the full image without cropping on hover */
+  }
+
+  .gallery-card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
   }
 
   .gallery-info {
-    padding: 15px 18px;
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 18px 18px;
+    padding: 20px;
+    background: #ffffff;
   }
 
-  .gallery-info h3 {
-    font-size: 1.2rem;
-    color: #66e0ff;
-    margin: 0 0 6px;
+  .gallery-info h3 { 
+    font-size: 1.1rem; 
+    margin: 0 0 8px; 
+    color: var(--primary-navy); 
+    font-weight: 700;
   }
 
-  .gallery-info p {
-    font-size: 0.95rem;
-    color: #cce8ff;
+  .gallery-info p { 
+    font-size: 0.9rem; 
+    color: var(--slate-600); 
+    margin: 0; 
+  }
+
+  .category-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--bg-light);
+    border: 1px solid var(--slate-200);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--slate-600);
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: 1fr; }
   }
 </style>
 
-
-
-
-<div class="gallery-container">
-  <h1>Diabetes Prediction Project Gallery</h1>
+<div class="gallery-section">
+  <div class="gallery-header">
+    <h1>System Visuals</h1>
+    <p>Hover to view the full details of each module.</p>
+  </div>
 
   <div class="gallery-grid">
-
-    <!-- 1 -->
-    <div class="gallery-card from-left">
-      <img src="{% static 'images/Diabetes_illustration.png' %}">
-      <div class="gallery-info"><h3>Diabetes Awareness</h3><p>Symptoms & causes.</p></div>
+    <div class="gallery-card">
+      <div class="image-container">
+        <img src="{% static 'images/Diabetes_illustration.png' %}" alt="Awareness">
+      </div>
+      <div class="gallery-info">
+        <span class="category-tag">Medical Overview</span>
+        <h3>Diabetes Awareness</h3>
+        <p>Patient education on symptoms and causes.</p>
+      </div>
     </div>
 
-    <!-- 2 -->
-    <div class="gallery-card from-right">
-      <img src="{% static 'images/workflow.png' %}">
-      <div class="gallery-info"><h3>Workflow</h3><p>ML pipeline.</p></div>
-    </div>
-  
-
-    <!-- 3 LEFT -->
-    <div class="gallery-card from-left">
-      <img src="{% static 'images/input.png' %}">
-      <div class="gallery-info"><h3>Input Form</h3><p>Patient parameters.</p></div>
+    <div class="gallery-card">
+      <div class="image-container">
+        <img src="{% static 'images/workflow.png' %}" alt="Workflow">
+      </div>
+      <div class="gallery-info">
+        <span class="category-tag">System Logic</span>
+        <h3>ML Workflow</h3>
+        <p>The architecture of the prediction pipeline.</p>
+      </div>
     </div>
 
-    <!-- 4 -->
-    <div class="gallery-card from-right">
-      <img src="{% static 'images/diabetes_result.png' %}">
-      <div class="gallery-info"><h3>Prediction Result</h3><p>Diabetic or not.</p></div>
+    <div class="gallery-card">
+        <div class="image-container">
+          <img src="{% static 'images/bar.png' %}" alt="Analysis">
+        </div>
+        <div class="gallery-info">
+          <span class="category-tag">Data Visualization</span>
+          <h3>Feature Analysis</h3>
+          <p>Dataset distribution and parameter weightage.</p>
+        </div>
     </div>
 
-    <!-- 5 -->
-    <div class="gallery-card from-left">
-      <img src="{% static 'images/location.png' %}">
-      <div class="gallery-info"><h3>Nearby Doctors</h3><p>Specialists around.</p></div>
+    <div class="gallery-card">
+        <div class="image-container">
+          <img src="{% static 'images/diabetes_result.png' %}" alt="Result">
+        </div>
+        <div class="gallery-info">
+          <span class="category-tag">Output Interface</span>
+          <h3>Diagnostic Result</h3>
+          <p>The final prediction UI for the end-user.</p>
+        </div>
     </div>
 
-    <!-- 6 -->
-    <div class="gallery-card from-right">
-      <img src="{% static 'images/bar.png' %}">
-      <div class="gallery-info"><h3>Bar Chart</h3><p>Dataset analysis.</p></div>
+    <div class="gallery-card">
+        <div class="image-container">
+          <img src="{% static 'images/accuracy.png' %}" alt="Performance">
+        </div>
+        <div class="gallery-info">
+          <span class="category-tag">Model Metrics</span>
+          <h3>AI Performance</h3>
+          <p>Accuracy comparisons across ML algorithms.</p>
+        </div>
     </div>
 
-    <!-- 7 -->
-    <div class="gallery-card from-left">
-      <img src="{% static 'images/pia_chart.png' %}">
-      <div class="gallery-info"><h3>Pie Chart</h3><p>Accuracy visualization.</p></div>
+    <div class="gallery-card">
+        <div class="image-container">
+          <img src="{% static 'images/location.png' %}" alt="Referral">
+        </div>
+        <div class="gallery-info">
+          <span class="category-tag">Clinical Network</span>
+          <h3>Specialist Mapping</h3>
+          <p>Geographic visualization for specialist referrals.</p>
+        </div>
     </div>
-
-    <!-- 8 -->
-    <div class="gallery-card from-right">
-      <img src="{% static 'images/accuracy.png' %}">
-      <div class="gallery-info"><h3>AI Accuracy</h3><p>Model comparison.</p></div>
-    </div>
-
   </div>
 </div>
 
-<!-- Animation Script -->
 <script>
-  window.onload = () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.gallery-card');
-    cards.forEach((card, i) => {
-      setTimeout(() => card.classList.add('show'), i * 250);
+    cards.forEach((card, index) => {
+      setTimeout(() => { card.classList.add('visible'); }, index * 100);
     });
-  };
+  });
 </script>
 
 {% endblock %}

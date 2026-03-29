@@ -5,4 +5,4 @@ from django.shortcuts import render
 def logout(request):
     #Clear all session data
     request.session.flush()
-    return render(request, 'logout.html', {'msg': 'You have been logged out successfully!'})
+    return render(request, 'home.html', {'msg': 'You have been logged out successfully!'})

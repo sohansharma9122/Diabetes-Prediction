@@ -1,35 +1,150 @@
 {% load static %}
-<header class="p-3 bg-dark text-white">
-<div class="container">
-  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
-    <!-- Logo -->
-    <img src="{% static 'images/diabetes_logo1.png' %}" width="45" height="45" class="me-3 rounded" alt="Logo">
-
-
-    <!-- NAV LIST -->
-    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-
-      <li><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li><a href="{% url 'contact' %}" class="nav-link px-2 text-body-secondary">contact</a></li>
-      <li><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">about</a></li>
-      <li><a href="{% url 'faq' %}" class="nav-link px-2 text-body-secondary">faq</a></li>
-      <li><a href="{% url 'gallary' %}" class="nav-link px-2 text-body-secondary">gallary</a></li>
-    </ul>
-
-    <!-- Search -->
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-    </form>
-
-    <!-- Auth Buttons -->
-    <div class="text-end">
-      <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}" class="text-white text-decoration-none">Login</a></button>
-      <button type="button" class="btn btn-warning"><a href="{% url 'register' %}" class="text-dark text-decoration-none">Sign-up</a></button>
-      <button type="button" class="btn btn-warning" style="background: red;"><a href="{% url  'logout' %}" class="text-dark text-decoration-none" >Logout</a></button>
-    </div>
+<nav class="navbar navbar-expand-lg main-navbar-header">
+  <div class="container-fluid px-lg-5">
     
+    <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+      <img src="{% static 'images/diabetes_logo1.png' %}" width="35" height="35" class="rounded me-2" alt="Logo">
+      <span class="brand-name">Clinica<span class="text-primary-blue">AI</span></span>
+    </a>
+
+    <div class="d-flex align-items-center order-lg-3 gap-2">
+      
+      {% if user.is_authenticated %}
+        <div class="dropdown">
+          <div class="user-avatar-container dropdown-toggle" data-bs-toggle="dropdown" style="cursor:pointer;">
+            <div class="user-avatar shadow-sm">
+              {{ user.username|slice:":2"|upper }}
+            </div>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
+            <li><a class="dropdown-item" href="#">👤 Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </div>
+      {% else %}
+        <div class="d-none d-lg-flex align-items-center gap-2">
+          <a href="{% url 'login' %}" class="btn-login-gray">Login</a>
+          <a href="{% url 'register' %}" class="btn-signup-black">Sign Up</a>
+        </div>
+      {% endif %}
+
+      <button class="navbar-toggler border-0 shadow-none pe-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse order-lg-2" id="mobileMenu">
+      <ul class="navbar-nav mx-auto nav-links-list mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'gallary' %}">Gallery</a></li>
+        
+        {% if not user.is_authenticated %}
+        <li class="nav-item d-lg-none mt-3 pt-3 border-top">
+          <div class="d-flex flex-column gap-2">
+             <a class="btn-login-gray px-0" href="{% url 'login' %}">Login</a>
+             <a class="btn-signup-black text-center" href="{% url 'register' %}">Sign Up</a>
+          </div>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
 
   </div>
-</div>
-</header>
+</nav>
+
+<style>
+  :root {
+    --primary-blue: #0284c7;
+    --navy-dark: #0f172a;
+    --text-gray: #64748b;
+  }
+
+  .main-navbar-header {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--navy-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .text-primary-blue { color: var(--primary-blue); }
+
+  /* Navbar Links */
+  .nav-links-list .nav-link {
+    color: var(--text-gray) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 18px !important;
+    transition: 0.2s;
+  }
+
+  .nav-links-list .nav-link:hover { color: var(--primary-blue) !important; }
+
+  /* User Avatar */
+  .user-avatar {
+    width: 38px;
+    height: 38px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  /* --- AUTH BUTTONS (GRAY & BLACK) --- */
+  .btn-login-gray { 
+    text-decoration: none; 
+    color: var(--text-gray) !important; 
+    font-weight: 600; 
+    padding: 8px 15px;
+    transition: 0.3s;
+  }
+  .btn-login-gray:hover { color: var(--navy-dark) !important; }
+
+  .btn-signup-black { 
+    text-decoration: none; 
+    background: #000000; /* Pure Black Background */
+    color: #ffffff !important; 
+    padding: 10px 24px; 
+    border-radius: 10px; 
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.3s;
+    border: 1px solid #000000;
+  }
+  .btn-signup-black:hover {
+    background: #334155;
+    border-color: #334155;
+    transform: translateY(-1px);
+  }
+
+  /* Mobile View Fixes */
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .nav-links-list .nav-link {
+      padding: 12px 0 !important;
+      border-bottom: 1px solid #f1f5f9;
+    }
+  }
+</style>
