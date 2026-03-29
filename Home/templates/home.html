@@ -5,6 +5,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --primary-blue: #0284c7;
+    --navy-900: #0f172a;
+    --slate-500: #64748b;
+    --font-main: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
   .hero-wrapper {
     position: relative;
     min-height: 90vh;
@@ -16,6 +24,16 @@
     background-size: cover;
     background-position: center;
     padding: 60px 0;
+  }
+
+  .hero-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--primary-blue) 0.5px, transparent 0.5px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+    z-index: 1;
   }
 
   .container-content {
@@ -40,11 +58,13 @@
   }
 
   .hero-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font-main);
+    /* Mobile par 2.5rem se 4.5rem ke beech scale karega */
     font-size: clamp(2.5rem, 6vw, 4.5rem); 
     font-weight: 800;
     color: var(--navy-900);
     line-height: 1.05;
+    letter-spacing: -0.04em;
     margin-bottom: 24px;
   }
 
@@ -56,65 +76,122 @@
   }
 
   .hero-description {
+    font-family: var(--font-body);
     font-size: 1.25rem;
-    color: #64748b;
+    color: var(--slate-500);
     line-height: 1.7;
     max-width: 600px;
     margin-bottom: 48px;
   }
 
-  .cta-box { display: flex; align-items: center; gap: 20px; }
+  .cta-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
   .btn-primary-custom {
     background: var(--navy-900);
     color: white;
-    padding: 18px 40px;
+    padding: 20px 42px;
     border-radius: 14px;
+    font-family: var(--font-body);
     font-weight: 600;
     text-decoration: none;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 15px 30px -10px rgba(15, 23, 42, 0.3);
     display: inline-block;
   }
 
-  .btn-primary-custom:hover { background: var(--primary-blue); transform: translateY(-3px); }
+  .btn-primary-custom:hover {
+    background: var(--primary-blue);
+    transform: translateY(-3px);
+  }
 
-  /* --- MOBILE FIXES --- */
+  .btn-secondary-custom {
+    color: var(--navy-900);
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* --- 📱 MOBILE-SPECIFIC FIXES (FOR NORMAL MODE) --- */
   @media (max-width: 991px) {
-    .hero-wrapper { background-position: 80% center; min-height: 85vh; padding: 40px 0; }
-    .container-content { margin-left: 5%; text-align: left; padding-right: 20px; }
-    .hero-title { font-size: 2.5rem !important; }
-    .hero-description { font-size: 1.1rem; max-width: 100%; margin-bottom: 35px; }
-    .cta-box { flex-direction: column; align-items: flex-start; gap: 15px; }
-    .btn-primary-custom { width: 100%; max-width: 280px; text-align: center; }
+    .hero-wrapper {
+        background-position: 80% center; 
+        padding: 40px 0;
+        min-height: 85vh;
+    }
+
+    .container-content { 
+        margin-left: 5%; /* Mobile par left margin kam kiya */
+        text-align: left; /* Center nahi kiya, professional left-align rakha */
+        padding-right: 15px;
+    }
+
+    .hero-title { 
+        font-size: 2.5rem; /* Mobile par fonts bade rahenge */
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+        max-width: 100%;
+        margin-bottom: 35px;
+    }
+
+    .cta-box { 
+        flex-direction: column; 
+        align-items: flex-start; /* Buttons ko left par hi rakha */
+        gap: 15px; 
+    }
+
+    .btn-primary-custom {
+        width: 100%; 
+        max-width: 300px; /* Full width but clean */
+        text-align: center;
+        padding: 18px 25px;
+    }
   }
 </style>
 
 <section class="hero-wrapper">
   <div class="container-fluid">
     <div class="container-content">
+      
       <div class="status-badge">
         <i class="bi bi-cpu-fill me-2"></i> Clinical Intelligence Platform
       </div>
+
       <h1 class="hero-title">
         Next-Generation<br>
         <span>Precision</span> Diagnostics.
       </h1>
+
       <p class="hero-description">
         Utilizing state-of-the-art predictive modeling to transform clinical data 
         into actionable health insights. Stay ahead of diabetes with medical-grade 
         analytical rigor.
       </p>
+
       <div class="cta-box">
         {% if request.session.Name %}
-            <a href="{% url 'predict' %}" class="btn-primary-custom">Start prediction Now</a>
+            <a href="{% url 'predict' %}" class="btn-primary-custom">
+              Start prediction Now
+            </a>
         {% else %}
-            <a href="#" onclick="openLoginModal()" class="btn-primary-custom">Start prediction Now</a>
+            <a href="#" onclick="openLoginModal()" class="btn-primary-custom">
+              Start prediction Now
+            </a>
         {% endif %}
-        <a href="/about" class="btn-secondary-custom fw-bold text-decoration-none text-dark">
+
+        <a href="/about" class="btn-secondary-custom">
           Read Methodology <i class="bi bi-arrow-right"></i>
         </a>
       </div>
+
     </div>
   </div>
 </section>
@@ -122,13 +199,17 @@
 <div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content shadow-lg border-0" style="border-radius: 20px;">
-      <div class="modal-header border-0 pb-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body text-center py-4">
-        <h5 class="fw-bold mb-3">Login Required</h5>
-        <p class="text-muted">Prediction use karne ke liye please login karein.</p>
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">Login Required</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4 text-muted">
+        Diagnostic prediction features use karne ke liye please pehle login karein.
       </div>
       <div class="modal-footer border-0 justify-content-center pb-4">
-        <a href="{% url 'login' %}" class="btn-primary-custom py-2 px-5" style="font-size: 0.9rem;">Go to Login</a>
+        <a href="{% url 'login' %}" class="btn-primary-custom py-2 px-5" style="font-size: 0.9rem;">
+          Login Page Par Jayein
+        </a>
       </div>
     </div>
   </div>
@@ -140,4 +221,5 @@ function openLoginModal() {
     myModal.show();
 }
 </script>
+
 {% endblock %}
