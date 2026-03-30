@@ -120,8 +120,8 @@
       padding-bottom: 2.5rem;
     }
 
-    /* Added Style for Forget Password Link */
-    .forget-password-link {
+    /* Styles for Links */
+    .forget-password-link, .signup-link {
       color: var(--slate-500);
       text-decoration: none;
       font-size: 0.8rem;
@@ -129,7 +129,7 @@
       transition: color 0.2s ease;
     }
 
-    .forget-password-link:hover {
+    .forget-password-link:hover, .signup-link:hover {
       color: var(--primary-blue);
     }
 
@@ -152,7 +152,7 @@
             <p class="text-muted small mt-2">Access the Intelligence Portal</p>
           </div>
           
-          <div class="card-body px-4 pb-4">
+          <div class="card-body px-4">
             <form method="post">
               {% csrf_token %}
 
@@ -175,13 +175,17 @@
             </form>
           </div>
 
-          {% if msg %}
-          <div class="card-footer text-center">
+          <div class="card-footer text-center pb-4">
+            <p class="small text-muted mb-3">Don't have an account? 
+                <a href="{% url 'register' %}" class="signup-link">Sign Up</a>
+            </p>
+
+            {% if msg %}
             <div class="alert alert-light border-0 text-danger p-0 m-0 fw-bold small">
               <i class="bi bi-exclamation-circle me-1"></i> {{ msg }}
             </div>
+            {% endif %}
           </div>
-          {% endif %}
         </div>
         
         <div class="text-center mt-4">
