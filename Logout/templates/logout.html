@@ -7,19 +7,28 @@
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      /* Background Image update yahan hai */
+      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8)), 
+                  url("{% static 'images/background.jpg' %}"); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
       color: white;
     }
     .logout-box {
       text-align: center;
       background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px); /* Background image ke upar box aur achha dikhega */
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     h1 {
       color: #4fd1c5;
@@ -33,9 +42,11 @@
       text-decoration: none;
       border-radius: 10px;
       transition: 0.3s;
+      font-weight: bold;
     }
     a:hover {
       background: #38b2ac;
+      transform: translateY(-2px);
     }
   </style>
 </head>
